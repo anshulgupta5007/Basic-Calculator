@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#764ba2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Modern Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="themeToggleWrap">
+      <button id="themeToggle" type="button">🌙 Dark</button>
+      <button id="historyToggle" type="button">🕘 History</button>
+    </div>
+    <div class="mainFrame">
+      <div class="displayBox">
+        <div class="contentDisplay">
+          <div class="displayExpression"></div>
+          <div class="displayMain"></div>
+        </div>
+      </div>
+      <div class="keyboardContent">
+        <div class="upperTab">
+          <span><button id="clear">AC</button></span>
+          <span><button id="modulas">%</button></span>
+          <span><button id="del">Back</button></span>
+          <span><button id="divide">÷</button></span>
+        </div>
+        <div class="secondUpperTab">
+          <span><button id="7">7</button></span>
+          <span><button id="8">8</button></span>
+          <span><button id="9">9</button></span>
+          <span><button id="multiply">×</button></span>
+        </div>
+        <div class="middleTab">
+          <span><button id="4">4</button></span>
+          <span><button id="5">5</button></span>
+          <span><button id="6">6</button></span>
+          <span><button id="subtract">-</button></span>
+        </div>
+        <div class="secondLowerTab">
+          <span><button id="1">1</button></span>
+          <span><button id="2">2</button></span>
+          <span><button id="3">3</button></span>
+          <span><button id="add">+</button></span>
+        </div>
+        <div class="lowerTab">
+          <span><button id="00">00</button></span>
+          <span><button id="0">0</button></span>
+          <span><button id="decimal">.</button></span>
+          <span><button id="equals">=</button></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
