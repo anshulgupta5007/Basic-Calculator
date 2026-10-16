@@ -17,6 +17,84 @@
     <div class="themeToggleWrap">
       <button id="themeToggle" type="button">🌙 Dark</button>
       <button id="historyToggle" type="button">🕘 History</button>
+      <div class="optionsDropdownWrap">
+        <button id="optionsToggle" type="button" aria-haspopup="true" aria-expanded="false">⚙️ Options <span class="dropdownArrow">▾</span></button>
+        <div class="optionsDropdownMenu" id="optionsDropdownMenu" aria-hidden="true">
+          <div class="dropdownSectionTitle">Converters & Tools</div>
+          <button class="dropdownItem" data-tool="unit" type="button">
+            <span class="dropdownItemIcon">📏</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Unit Converter</span>
+              <span class="dropdownItemDesc">Speed, Length, Weight, Temp</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="currency" type="button">
+            <span class="dropdownItemIcon">💱</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Currency Converter</span>
+              <span class="dropdownItemDesc">Live rates via Frankfurter API</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="discount" type="button">
+            <span class="dropdownItemIcon">🏷️</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Discount Calculator</span>
+              <span class="dropdownItemDesc">Sale price & savings</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="tip" type="button">
+            <span class="dropdownItemIcon">🍽️</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Tip & Bill Splitter</span>
+              <span class="dropdownItemDesc">Dining tip & per-person share</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="base" type="button">
+            <span class="dropdownItemIcon">💻</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Base Converter</span>
+              <span class="dropdownItemDesc">Decimal, Hex, Binary, Octal</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="bmi" type="button">
+            <span class="dropdownItemIcon">⚖️</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">BMI Calculator</span>
+              <span class="dropdownItemDesc">Body mass index & status</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-tool="age" type="button">
+            <span class="dropdownItemIcon">📅</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Age & Date Calculator</span>
+              <span class="dropdownItemDesc">Exact age & total days</span>
+            </div>
+          </button>
+          <div class="dropdownDivider"></div>
+          <div class="dropdownSectionTitle">Quick Actions</div>
+          <button class="dropdownItem" data-action="history" type="button">
+            <span class="dropdownItemIcon">🕘</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">History</span>
+              <span class="dropdownItemDesc">View calculation history</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-action="theme" type="button">
+            <span class="dropdownItemIcon">🌓</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Toggle Theme</span>
+              <span class="dropdownItemDesc">Switch Dark / Light theme</span>
+            </div>
+          </button>
+          <button class="dropdownItem" data-action="clear" type="button">
+            <span class="dropdownItemIcon">🧹</span>
+            <div class="dropdownItemText">
+              <span class="dropdownItemTitle">Clear All</span>
+              <span class="dropdownItemDesc">Reset calculator display</span>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="mainFrame">
       <div class="displayBox">
@@ -55,6 +133,207 @@
           <span><button id="0">0</button></span>
           <span><button id="decimal">.</button></span>
           <span><button id="equals">=</button></span>
+        </div>
+      </div>
+      <div class="historyPanel" id="historyPanel" aria-hidden="true">
+        <div class="historyHeader">
+          <span class="historyHeaderTitle">Calculation History</span>
+          <div class="historyHeaderActions">
+            <button id="clearHistoryBtn" class="historyClearBtn" type="button" title="Clear history">Clear</button>
+            <button id="closeHistoryBtn" class="historyCloseBtn" type="button" title="Close history" aria-label="Close history">✕</button>
+          </div>
+        </div>
+        <div class="historyList" id="historyList">
+          <div class="historyEmpty">No history yet</div>
+        </div>
+      </div>
+      <div class="optionsPanel" id="optionsPanel" aria-hidden="true">
+        <div class="optionsHeader">
+          <div class="optionsHeaderLeft">
+            <span class="optionsHeaderIcon" id="optionsHeaderIcon">📏</span>
+            <span class="optionsHeaderTitle" id="optionsHeaderTitle">Unit Converter</span>
+          </div>
+          <div class="optionsHeaderActions">
+            <button id="optionsSwitchBtn" class="optionsSwitchBtn" type="button" title="Switch to another tool">Change Tool ▾</button>
+            <button id="closeOptionsBtn" class="optionsCloseBtn" type="button" title="Close options" aria-label="Close options">✕</button>
+          </div>
+        </div>
+
+        <div class="optionsContent">
+          <!-- Unit Converter -->
+          <div class="optionsTabPane active" id="tab-unit">
+            <div class="toolGroup">
+              <label for="unitCategory">Category</label>
+              <select id="unitCategory" class="toolSelect">
+                <option value="speed">Speed</option>
+                <option value="length">Length</option>
+                <option value="mass">Mass / Weight</option>
+                <option value="temperature">Temperature</option>
+                <option value="digital">Digital Storage</option>
+                <option value="time">Time</option>
+              </select>
+            </div>
+            <div class="toolConversionGrid">
+              <div class="toolCol">
+                <label for="unitFromVal">From</label>
+                <input id="unitFromVal" type="number" class="toolInput" value="100" />
+                <select id="unitFromSelect" class="toolSelect"></select>
+              </div>
+              <button id="unitSwapBtn" class="toolSwapBtn" type="button" title="Swap units">⇄</button>
+              <div class="toolCol">
+                <label for="unitToVal">To</label>
+                <input id="unitToVal" type="text" class="toolInput toolOutput" readonly />
+                <select id="unitToSelect" class="toolSelect"></select>
+              </div>
+            </div>
+            <button id="unitUseBtn" class="toolApplyBtn" type="button">Use in Calculator</button>
+          </div>
+
+          <!-- Currency Converter -->
+          <div class="optionsTabPane" id="tab-currency">
+            <div class="toolConversionGrid">
+              <div class="toolCol">
+                <label for="currencyAmount">Amount</label>
+                <input id="currencyAmount" type="number" class="toolInput" value="100" />
+                <select id="currencyFromSelect" class="toolSelect">
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="INR" selected>INR (₹)</option>
+                  <option value="JPY">JPY (¥)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="AUD">AUD ($)</option>
+                  <option value="CNY">CNY (¥)</option>
+                  <option value="CHF">CHF (Fr)</option>
+                  <option value="AED">AED (د.إ)</option>
+                </select>
+              </div>
+              <button id="currencySwapBtn" class="toolSwapBtn" type="button" title="Swap currencies">⇄</button>
+              <div class="toolCol">
+                <label for="currencyResult">Converted</label>
+                <input id="currencyResult" type="text" class="toolInput toolOutput" readonly />
+                <select id="currencyToSelect" class="toolSelect">
+                  <option value="USD" selected>USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="GBP">GBP (£)</option>
+                  <option value="INR">INR (₹)</option>
+                  <option value="JPY">JPY (¥)</option>
+                  <option value="CAD">CAD ($)</option>
+                  <option value="AUD">AUD ($)</option>
+                  <option value="CNY">CNY (¥)</option>
+                  <option value="CHF">CHF (Fr)</option>
+                  <option value="AED">AED (د.إ)</option>
+                </select>
+              </div>
+            </div>
+            <div class="toolSubInfo" id="currencyRateInfo">Exchange Rate Info</div>
+            <button id="currencyUseBtn" class="toolApplyBtn" type="button">Use in Calculator</button>
+          </div>
+
+          <!-- Discount Calculator -->
+          <div class="optionsTabPane" id="tab-discount">
+            <div class="toolRow">
+              <div class="toolCol">
+                <label for="discountPrice">Original Price</label>
+                <input id="discountPrice" type="number" class="toolInput" value="1000" />
+              </div>
+              <div class="toolCol">
+                <label for="discountRate">Discount %</label>
+                <input id="discountRate" type="number" class="toolInput" value="20" />
+              </div>
+            </div>
+            <div class="toolPills">
+              <button type="button" class="toolPill" data-discount="10">10%</button>
+              <button type="button" class="toolPill" data-discount="20">20%</button>
+              <button type="button" class="toolPill" data-discount="30">30%</button>
+              <button type="button" class="toolPill" data-discount="50">50%</button>
+            </div>
+            <div class="toolResultCard">
+              <div class="toolResultRow"><span>Final Price:</span><strong id="discountFinal">--</strong></div>
+              <div class="toolResultRow"><span>You Save:</span><span id="discountSaved" class="textSuccess">--</span></div>
+            </div>
+            <button id="discountUseBtn" class="toolApplyBtn" type="button">Use in Calculator</button>
+          </div>
+
+          <!-- Tip Calculator -->
+          <div class="optionsTabPane" id="tab-tip">
+            <div class="toolRow">
+              <div class="toolCol">
+                <label for="tipBill">Bill Amount</label>
+                <input id="tipBill" type="number" class="toolInput" value="120" />
+              </div>
+              <div class="toolCol">
+                <label for="tipPercent">Tip %</label>
+                <input id="tipPercent" type="number" class="toolInput" value="15" />
+              </div>
+            </div>
+            <div class="toolGroup">
+              <label for="tipSplit">Split with (people)</label>
+              <input id="tipSplit" type="number" class="toolInput" min="1" value="2" />
+            </div>
+            <div class="toolResultCard">
+              <div class="toolResultRow"><span>Tip Amount:</span><strong id="tipTotalTip">--</strong></div>
+              <div class="toolResultRow"><span>Total Bill:</span><strong id="tipTotalBill">--</strong></div>
+              <div class="toolResultRow highlight"><span>Per Person:</span><strong id="tipPerPerson">--</strong></div>
+            </div>
+            <button id="tipUseBtn" class="toolApplyBtn" type="button">Use in Calculator</button>
+          </div>
+
+          <!-- Base Converter -->
+          <div class="optionsTabPane" id="tab-base">
+            <div class="toolGroup">
+              <label for="baseDecInput">Decimal (DEC)</label>
+              <input id="baseDecInput" type="number" class="toolInput" value="42" />
+            </div>
+            <div class="toolBaseList">
+              <div class="toolBaseRow">
+                <span class="toolBaseLabel">BIN</span>
+                <span id="baseBinVal" class="toolBaseVal">101010</span>
+                <button type="button" class="toolCopyBtn" data-target="baseBinVal">Copy</button>
+              </div>
+              <div class="toolBaseRow">
+                <span class="toolBaseLabel">HEX</span>
+                <span id="baseHexVal" class="toolBaseVal">2A</span>
+                <button type="button" class="toolCopyBtn" data-target="baseHexVal">Copy</button>
+              </div>
+              <div class="toolBaseRow">
+                <span class="toolBaseLabel">OCT</span>
+                <span id="baseOctVal" class="toolBaseVal">52</span>
+                <button type="button" class="toolCopyBtn" data-target="baseOctVal">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- BMI Calculator -->
+          <div class="optionsTabPane" id="tab-bmi">
+            <div class="toolRow">
+              <div class="toolCol">
+                <label for="bmiWeight">Weight (kg)</label>
+                <input id="bmiWeight" type="number" class="toolInput" value="70" />
+              </div>
+              <div class="toolCol">
+                <label for="bmiHeight">Height (cm)</label>
+                <input id="bmiHeight" type="number" class="toolInput" value="175" />
+              </div>
+            </div>
+            <div class="toolResultCard">
+              <div class="toolResultRow"><span>BMI Score:</span><strong id="bmiScore">--</strong></div>
+              <div class="toolResultRow"><span>Category:</span><span id="bmiCategory" class="bmiBadge badgeNormal">Normal</span></div>
+            </div>
+            <button id="bmiUseBtn" class="toolApplyBtn" type="button">Use in Calculator</button>
+          </div>
+
+          <!-- Age Calculator -->
+          <div class="optionsTabPane" id="tab-age">
+            <div class="toolGroup">
+              <label for="birthDateInput">Date of Birth</label>
+              <input id="birthDateInput" type="date" class="toolInput" />
+            </div>
+            <div class="toolResultCard">
+              <div class="toolResultRow"><span>Exact Age:</span><strong id="ageResult">Select birthdate</strong></div>
+              <div class="toolResultRow"><span>Total Days:</span><span id="ageTotalDays">--</span></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
